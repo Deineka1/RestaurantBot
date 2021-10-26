@@ -3,9 +3,9 @@ from aiogram.types import KeyboardButton, ReplyKeyboardMarkup
 btnMain = KeyboardButton('Главное меню')
 
 #Кнопки главного меню
-b2 = KeyboardButton('Меню админа')
+b2 = KeyboardButton('Меню Администратора')
 b1 = KeyboardButton('/test')
-b3 = KeyboardButton('Меню Верешка')
+b3 = KeyboardButton('Меню Клиента')
 kb_Main = ReplyKeyboardMarkup(resize_keyboard=True).row(b2, b3)
 kb_test = ReplyKeyboardMarkup(resize_keyboard=True).add(b1).add(btnMain)
 
