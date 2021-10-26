@@ -20,7 +20,7 @@ class Admin(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
-    await bot.send_message(message.from_user.id, 'Приветствуем Вас, Верешок!', reply_markup=nav.kb_Main)
+    await bot.send_message(message.from_user.id, 'Приветствуем Вас!', reply_markup=nav.kb_Main)
 
 
 @dp.message_handler(Command('test'), state=None)
@@ -39,7 +39,9 @@ async def answer_login(message: types.Message, state: FSMContext):
         print('Ввели правильный логин')
         await state.update_data({'answer1': login})
         await message.answer('Введите пароль')
+        await message.delete()
         await Admin.password.set()
+        
     else:
         print('Ошибка логина')
         await message.answer('Пользователя с таким логином не существует', reply_markup=nav.kb_Main)
@@ -51,7 +53,8 @@ async def answer_password(message: types.Message, state: FSMContext):
     if password == '222':
         print('УРА')
         await state.update_data({'answer2': password})
-        await message.answer('Верешок зашел в чат', reply_markup=nav.kb_admin)
+        await message.answer('Вы зашли в меню администратора', reply_markup=nav.kb_admin)
+        await message.delete()
         await Admin.markups.set()
     else:
         print('Ошибка пароля')
@@ -78,7 +81,7 @@ async def answer_markups(message: types.Message, state: FSMContext):
 
 @dp.message_handler()
 async def process_start_command(message: types.Message):
-    if message.text == 'Меню Верешка':
+    if message.text == 'Меню Клиента':
         await bot.send_message(message.from_user.id, 'Меню клиента', reply_markup=nav.kb_client)
     elif message.text == 'На месте':
         await bot.send_message(message.from_user.id, 'Что Вам принести?', reply_markup=nav.kb_nameste)
