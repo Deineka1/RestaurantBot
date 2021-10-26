@@ -4,8 +4,8 @@ from aiogram.dispatcher.filters import Command
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
+from config import Token
 
-Token = '2072932587:AAGqf3-IrAbNDvthEHHBj_ij_viFHIwoCn0'
 
 storage = MemoryStorage()
 
