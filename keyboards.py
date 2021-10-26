@@ -9,7 +9,6 @@ b3 = KeyboardButton('Меню Верешка')
 kb_Main = ReplyKeyboardMarkup(resize_keyboard=True).row(b2, b3)
 kb_test = ReplyKeyboardMarkup(resize_keyboard=True).add(b1).add(btnMain)
 
-
 #Кнопки меню клиента
 b4 = KeyboardButton('На месте')
 b5 = KeyboardButton('С собой')
