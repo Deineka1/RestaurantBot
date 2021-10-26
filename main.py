@@ -101,7 +101,7 @@ async def process_start_command(message: types.Message):
         await bot.send_message(message.from_user.id, 'Выберете блюдо')
     elif message.text == 'Посмотреть заказ':
         await bot.send_message(message.from_user.id, 'Ваш заказ: ')
-    elif message.text == 'Меню админа':
+    elif message.text == 'Меню Администратора':
         await bot.send_message(message.from_user.id, 'Чтобы зайти в меню администратора, нажмите /test', reply_markup=nav.kb_test)
     elif message.text == 'Главное меню':
         await bot.send_message(message.from_user.id, 'Главное меню', reply_markup=nav.kb_Main)
