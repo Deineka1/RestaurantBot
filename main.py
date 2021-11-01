@@ -4,9 +4,8 @@ from aiogram.dispatcher.filters import Command
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from config import Token
 
-
+Token = '2034589150:AAGr6gF2uuR4p-AqMfg2Nd1q2FvD1iQ0lYk'
 
 storage = MemoryStorage()
 
@@ -20,7 +19,7 @@ class Admin(StatesGroup):
 
 @dp.message_handler(commands=['start'])
 async def process_start_command(message: types.Message):
-    await bot.send_message(message.from_user.id, 'Приветствуем Вас!', reply_markup=nav.kb_Main)
+    await bot.send_message(message.from_user.id, 'Приветствуем Вас, Верешок!', reply_markup=nav.kb_Main)
 
 
 @dp.message_handler(Command('test'), state=None)
@@ -39,9 +38,7 @@ async def answer_login(message: types.Message, state: FSMContext):
         print('Ввели правильный логин')
         await state.update_data({'answer1': login})
         await message.answer('Введите пароль')
-        await message.delete()
         await Admin.password.set()
-        
     else:
         print('Ошибка логина')
         await message.answer('Пользователя с таким логином не существует', reply_markup=nav.kb_Main)
@@ -53,8 +50,7 @@ async def answer_password(message: types.Message, state: FSMContext):
     if password == '222':
         print('УРА')
         await state.update_data({'answer2': password})
-        await message.answer('Вы зашли в меню администратора', reply_markup=nav.kb_admin)
-        await message.delete()
+        await message.answer('Верешок зашел в чат', reply_markup=nav.kb_admin)
         await Admin.markups.set()
     else:
         print('Ошибка пароля')
@@ -81,7 +77,7 @@ async def answer_markups(message: types.Message, state: FSMContext):
 
 @dp.message_handler()
 async def process_start_command(message: types.Message):
-    if message.text == 'Меню Клиента':
+    if message.text == 'Меню Верешка':
         await bot.send_message(message.from_user.id, 'Меню клиента', reply_markup=nav.kb_client)
     elif message.text == 'На месте':
         await bot.send_message(message.from_user.id, 'Что Вам принести?', reply_markup=nav.kb_nameste)
@@ -101,7 +97,7 @@ async def process_start_command(message: types.Message):
         await bot.send_message(message.from_user.id, 'Выберете блюдо')
     elif message.text == 'Посмотреть заказ':
         await bot.send_message(message.from_user.id, 'Ваш заказ: ')
-    elif message.text == 'Меню Администратора':
+    elif message.text == 'Меню админа':
         await bot.send_message(message.from_user.id, 'Чтобы зайти в меню администратора, нажмите /test', reply_markup=nav.kb_test)
     elif message.text == 'Главное меню':
         await bot.send_message(message.from_user.id, 'Главное меню', reply_markup=nav.kb_Main)
@@ -110,5 +106,6 @@ async def process_start_command(message: types.Message):
 
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
+
 
 
